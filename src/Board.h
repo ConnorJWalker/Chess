@@ -2,10 +2,10 @@
 
 class Board {
 public:
-    Board(sf::RenderWindow* window);
+    explicit Board(sf::RenderWindow& window);
     void Draw();
 
 private:
-    sf::RenderWindow* Window;
+    sf::RenderWindow& Window;
 };
 

@@ -5,12 +5,11 @@
 class Game {
 public:
     Game();
-    ~Game();
 
     void Start();
 
 private:
-    sf::RenderWindow* Window = nullptr;
+    sf::RenderWindow Window;
     Board Board;
 };
 

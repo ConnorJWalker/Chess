@@ -2,7 +2,7 @@
 
 #include "Board.h"
 
-Board::Board(sf::RenderWindow* window) : Window(window) {}
+Board::Board(sf::RenderWindow& window) : Window(window) {}
 
 void Board::Draw() {
     // Draw chess board squares (8 x 8)
@@ -13,7 +13,7 @@ void Board::Draw() {
             square.setFillColor(isWhiteSquare ? sf::Color::White : sf::Color(110, 80, 60));
             square.setPosition(x * 100, y * 100);
 
-            Window->draw(square);
+            Window.draw(square);
 
             isWhiteSquare = !isWhiteSquare;
         }
