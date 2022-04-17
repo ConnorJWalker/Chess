@@ -8,8 +8,8 @@ TextureManager::TextureManager() {
     LoadTextures();
 }
 
-sf::Texture& TextureManager::GetTexture(PieceType type, bool isWhite) {
-    return isWhite ? WhiteTextures[type] : BlackTextures[type];
+sf::Texture& TextureManager::GetTexture(PieceType type, PieceColour colour) {
+    return colour == PieceColour::White ? WhiteTextures[type] : BlackTextures[type];
 }
 
 bool TextureManager::LoadTextures() {

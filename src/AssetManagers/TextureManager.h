@@ -1,11 +1,12 @@
 #pragma once
-#include "../PieceType.h"
+#include "../Enums/PieceType.h"
+#include "../Enums/PieceColour.h"
 
 class TextureManager {
 public:
     TextureManager();
 
-    sf::Texture& GetTexture(PieceType type, bool isWhite);
+    sf::Texture& GetTexture(PieceType type, PieceColour colour);
 
 private:
     bool LoadTextures();
