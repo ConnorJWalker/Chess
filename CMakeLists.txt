@@ -3,7 +3,7 @@ project(Chess)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(Chess src/Main.cpp src/Game.cpp src/Game.h src/Board.cpp src/Board.h)
+add_executable(Chess src/Main.cpp src/Game.cpp src/Game.h src/Board.cpp src/Board.h src/AssetManagers/TextureManager.cpp src/AssetManagers/TextureManager.h src/PieceType.h)
 
 include_directories(/usr/local/include)
 
