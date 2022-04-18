@@ -10,6 +10,8 @@ public:
 
 private:
     sf::RenderWindow Window;
+
+    TextureManager TextureManager;
     Board Board;
 };
 
