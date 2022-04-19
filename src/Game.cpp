@@ -47,5 +47,5 @@ void Game::HandleEvents() {
 }
 
 void Game::HandleClickEvent(sf::Event event) {
-    Players[CurrentPlayer].HandleClickEvent(event);
+    Players[CurrentPlayer].HandleClickEvent(event, Players[CurrentPlayer == 0 ? 1 : 0].GetPieces());
 }

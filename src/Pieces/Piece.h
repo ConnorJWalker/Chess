@@ -23,11 +23,13 @@ public:
         return Body.getGlobalBounds().contains((float)x, (float)y);
     }
 
-    void HandleClickEvent() {
-        std::cout << "Piece clicked at X: " << Location.x << " Y: " << Location.y << std::endl;
+    sf::Vector2i GetLocation() {
+        return Location;
     }
 
 private:
     sf::RectangleShape Body;
+
+protected:
     sf::Vector2i Location;
 };
