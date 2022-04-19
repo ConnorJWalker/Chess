@@ -47,10 +47,10 @@ private:
 
     void CheckSpacesAhead(bool& isPieceInFront, bool& isPiece2Ahead, std::vector<Piece*> const& pieces) {
         for (Piece* piece : pieces) {
-            if (piece->GetLocation().y == Location.y + MovementDirection) {
+            if (piece->GetLocation().y == Location.y + MovementDirection && piece->GetLocation().x == Location.x) {
                 isPieceInFront = true;
             }
-            else if (piece->GetLocation().y == Location.y + MovementDirection * 2) {
+            else if (piece->GetLocation().y == Location.y + MovementDirection * 2 && piece->GetLocation().x == Location.x) {
                 isPiece2Ahead = true;
             }
         }

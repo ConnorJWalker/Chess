@@ -56,13 +56,13 @@ void Game::HandleClickEvent(sf::Event event) {
         if (event.mouseButton.button == sf::Mouse::Left) {
             int otherPlayer = CurrentPlayer == 0 ? 1 : 0;
             auto possibleMoves = Players[CurrentPlayer].GetPossibleMoves(SelectedPieceIndex, Players[otherPlayer].GetPieces());
-
             Board.SetPossibleMoves(possibleMoves);
         }
     }
     else {
         if (Board.ClickedPossibleMove(mousePosition)) {
             Players[CurrentPlayer].MovePiece(SelectedPieceIndex, mousePosition / 100);
+            SelectedPieceIndex = -1;
         }
 
         Board.ClearPossibleMoves();
