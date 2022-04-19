@@ -10,7 +10,10 @@ public:
     }
 
     virtual ~Piece() = default;
-    virtual std::vector<sf::Vector2i> GetPossibleMoves() = 0;
+    virtual std::vector<sf::Vector2i> GetPossibleMoves(
+            std::vector<Piece*> const& currentPlayer,
+            std::vector<Piece*> const& other
+        ) = 0;
 
     void Draw(sf::RenderWindow& window) {
         window.draw(Body);
