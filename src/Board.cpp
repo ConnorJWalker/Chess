@@ -15,7 +15,9 @@ void Board::Draw() {
     for (int y = 0; y < 8; y++) {
         for (int x = 0; x < 8; x++) {
             sf::RectangleShape square(sf::Vector2f(100.f, 100.f));
-            square.setFillColor(isWhiteSquare ? sf::Color::White : sf::Color(110, 80, 60));
+            sf::Color colour = isWhiteSquare ? sf::Color::White : sf::Color(110, 80, 60);
+
+            square.setFillColor(colour);
             square.setPosition(x * 100, y * 100);
 
             Window.draw(square);
@@ -24,6 +26,18 @@ void Board::Draw() {
         }
 
         isWhiteSquare = !isWhiteSquare;
+    }
+
+    // Draw possible moves
+    if (!PossibleMoves.empty()) {
+        for (sf::Vector2i move : PossibleMoves) {
+            sf::CircleShape circle(10);
+            circle.setOrigin(circle.getRadius(), circle.getRadius());
+            circle.setFillColor(sf::Color(200, 100, 100, 200));
+            circle.setPosition((move.x * 100.f) + 50.f, (move.y * 100.f) + 50.f);
+
+            Window.draw(circle);
+        }
     }
 }
 
@@ -58,4 +72,12 @@ std::vector<Piece*> Board::InitBoardPieces(PieceColour colour) {
     pieces.push_back(new Bishop(sf::Vector2i(4, otherY), kingTexture));
 
     return pieces;
+}
+
+void Board::ClearPossibleMoves() {
+    PossibleMoves.clear();
+}
+
+void Board::SetPossibleMoves(std::vector<sf::Vector2i> possibleMoves) {
+    PossibleMoves = possibleMoves;
 }

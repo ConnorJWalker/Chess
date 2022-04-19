@@ -24,19 +24,16 @@ void Player::Draw() {
     }
 }
 
-void Player::HandleClickEvent(sf::Event event, std::vector<Piece*> const& otherPlayersPieces) {
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(Window);
-    for (Piece* piece : Pieces) {
-        if (piece->HasBeenClicked(mousePosition.x, mousePosition.y)) {
-            if (event.mouseButton.button == sf::Mouse::Left) {
-                auto possibleMoves = piece->GetPossibleMoves(Pieces, otherPlayersPieces);
-                for (auto move : possibleMoves) {
-                    std::cout << "X: " << move.x << " Y: " << move.y << std::endl;
-                }
-
-                return;
-            }
+int Player::FindClickedPieceIndex(sf::Vector2i mousePosition) {
+    for (int i = 0; i < Pieces.size(); i++) {
+        if (Pieces[i]->HasBeenClicked(mousePosition.x, mousePosition.y)) {
+            return i;
         }
     }
+
+    return -1;
 }
 
+std::vector<sf::Vector2i> Player::GetPossibleMoves(int index, std::vector<Piece*> const& otherPlayersPieces) {
+    return Pieces[index]->GetPossibleMoves(Pieces, otherPlayersPieces);
+}

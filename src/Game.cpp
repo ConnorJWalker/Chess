@@ -47,5 +47,18 @@ void Game::HandleEvents() {
 }
 
 void Game::HandleClickEvent(sf::Event event) {
-    Players[CurrentPlayer].HandleClickEvent(event, Players[CurrentPlayer == 0 ? 1 : 0].GetPieces());
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(Window);
+
+    int index = Players[CurrentPlayer].FindClickedPieceIndex(mousePosition);
+    if (index != -1) {
+        if (event.mouseButton.button == sf::Mouse::Left) {
+            int otherPlayer = CurrentPlayer == 0 ? 1 : 0;
+            auto possibleMoves = Players[CurrentPlayer].GetPossibleMoves(index, Players[otherPlayer].GetPieces());
+
+            Board.SetPossibleMoves(possibleMoves);
+        }
+    }
+    else {
+        Board.ClearPossibleMoves();
+    }
 }
