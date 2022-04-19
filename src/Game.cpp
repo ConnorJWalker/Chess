@@ -6,12 +6,13 @@
 Game::Game() :
     Window(sf::RenderWindow(sf::VideoMode(800, 800), "Chess", sf::Style::Titlebar | sf::Style::Close)),
     TextureManager(),
-    Board(Window, TextureManager) {}
+    Board(Window, TextureManager),
+    Players {
+    Player(Window, PieceColour::White,Board.InitBoardPieces(PieceColour::White)),
+    Player(Window, PieceColour::Black,Board.InitBoardPieces(PieceColour::Black))
+    } {}
 
 void Game::Start() {
-    auto whitePieces = Board.InitBoardPieces(PieceColour::White);
-    auto blackPieces = Board.InitBoardPieces(PieceColour::Black);
-
     while (Window.isOpen())
     {
         sf::Event event;
@@ -21,19 +22,16 @@ void Game::Start() {
                 Window.close();
         }
 
-        Window.clear();
-        Board.Draw();
-
-        for (int i = 0; i < whitePieces.size(); i++) {
-            Window.draw(whitePieces[i]->body);
-            Window.draw(blackPieces[i]->body);
-        }
-
-        Window.display();
+        Draw();
     }
+}
 
-    for (int i = 0; i < whitePieces.size(); i++) {
-        delete whitePieces[i];
-        delete blackPieces[i];
-    }
+void Game::Draw() {
+    Window.clear();
+
+    Board.Draw();
+    Players[0].Draw();
+    Players[1].Draw();
+
+    Window.display();
 }
