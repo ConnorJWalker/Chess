@@ -1,4 +1,5 @@
-#include <vector>
+#include <utility>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "Pieces/Pawn.h"
@@ -79,5 +80,10 @@ void Board::ClearPossibleMoves() {
 }
 
 void Board::SetPossibleMoves(std::vector<sf::Vector2i> possibleMoves) {
-    PossibleMoves = possibleMoves;
+    PossibleMoves = std::move(possibleMoves);
+}
+
+bool Board::ClickedPossibleMove(sf::Vector2i mousePosition) {
+    sf::Vector2i square = mousePosition / 100;
+    return std::any_of(PossibleMoves.begin(), PossibleMoves.end(), [square](sf::Vector2i move){ return move == square; });
 }

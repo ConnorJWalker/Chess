@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "Enums/PieceColour.h"
@@ -59,6 +60,10 @@ void Game::HandleClickEvent(sf::Event event) {
         }
     }
     else {
+        if (Board.ClickedPossibleMove(mousePosition)) {
+            std::cout << "Clicked possible move" << std::endl;
+        }
+
         Board.ClearPossibleMoves();
     }
 }

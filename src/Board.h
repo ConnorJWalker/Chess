@@ -12,6 +12,7 @@ public:
     void Draw();
     void ClearPossibleMoves();
     void SetPossibleMoves(std::vector<sf::Vector2i> possibleMoves);
+    bool ClickedPossibleMove(sf::Vector2i mousePosition);
     std::vector<Piece*> InitBoardPieces(PieceColour colour);
 
 private:
