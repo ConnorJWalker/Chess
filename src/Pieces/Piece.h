@@ -23,6 +23,11 @@ public:
         return Body.getGlobalBounds().contains((float)x, (float)y);
     }
 
+    void Move(sf::Vector2i square) {
+        Location = square;
+        Body.setPosition((Location.x * 100.f) + 50.f, (Location.y * 100.f) + 50.f);
+    }
+
     sf::Vector2i GetLocation() {
         return Location;
     }

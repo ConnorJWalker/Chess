@@ -1,6 +1,5 @@
 #include <vector>
 #include <utility>
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "../Pieces/Piece.h"
@@ -36,4 +35,8 @@ int Player::FindClickedPieceIndex(sf::Vector2i mousePosition) {
 
 std::vector<sf::Vector2i> Player::GetPossibleMoves(int index, std::vector<Piece*> const& otherPlayersPieces) {
     return Pieces[index]->GetPossibleMoves(Pieces, otherPlayersPieces);
+}
+
+void Player::MovePiece(int index, sf::Vector2i square) {
+    Pieces[index]->Move(square);
 }

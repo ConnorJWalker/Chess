@@ -52,16 +52,17 @@ void Game::HandleClickEvent(sf::Event event) {
 
     int index = Players[CurrentPlayer].FindClickedPieceIndex(mousePosition);
     if (index != -1) {
+        SelectedPieceIndex = index;
         if (event.mouseButton.button == sf::Mouse::Left) {
             int otherPlayer = CurrentPlayer == 0 ? 1 : 0;
-            auto possibleMoves = Players[CurrentPlayer].GetPossibleMoves(index, Players[otherPlayer].GetPieces());
+            auto possibleMoves = Players[CurrentPlayer].GetPossibleMoves(SelectedPieceIndex, Players[otherPlayer].GetPieces());
 
             Board.SetPossibleMoves(possibleMoves);
         }
     }
     else {
         if (Board.ClickedPossibleMove(mousePosition)) {
-            std::cout << "Clicked possible move" << std::endl;
+            Players[CurrentPlayer].MovePiece(SelectedPieceIndex, mousePosition / 100);
         }
 
         Board.ClearPossibleMoves();

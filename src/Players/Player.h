@@ -6,6 +6,7 @@ public:
     ~Player();
 
     void Draw();
+    void MovePiece(int index, sf::Vector2i square);
     int FindClickedPieceIndex(sf::Vector2i mousePosition);
     std::vector<sf::Vector2i> GetPossibleMoves(int index, std::vector<Piece*> const& otherPlayersPieces);
 

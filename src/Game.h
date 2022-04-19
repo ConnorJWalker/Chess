@@ -16,6 +16,8 @@ private:
     Board Board;
     Player Players[2];
 
+    int SelectedPieceIndex = -1;
+
     void Draw();
     void HandleEvents();
     void HandleClickEvent(sf::Event event);
