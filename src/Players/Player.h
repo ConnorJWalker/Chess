@@ -6,6 +6,7 @@ public:
     ~Player();
 
     void Draw();
+    void HandleClickEvent(sf::Event event);
 private:
     sf::RenderWindow& Window;
     PieceColour Colour;

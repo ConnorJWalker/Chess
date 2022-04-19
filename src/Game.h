@@ -17,5 +17,9 @@ private:
     Player Players[2];
 
     void Draw();
+    void HandleEvents();
+    void HandleClickEvent(sf::Event event);
+
+    int CurrentPlayer = 0;
 };
 

@@ -15,13 +15,7 @@ Game::Game() :
 void Game::Start() {
     while (Window.isOpen())
     {
-        sf::Event event;
-        while (Window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                Window.close();
-        }
-
+        HandleEvents();
         Draw();
     }
 }
@@ -34,4 +28,24 @@ void Game::Draw() {
     Players[1].Draw();
 
     Window.display();
+}
+
+void Game::HandleEvents() {
+    sf::Event event{};
+    while (Window.pollEvent(event))
+    {
+        switch(event.type) {
+            case sf::Event::Closed:
+                Window.close();
+                break;
+            case sf::Event::MouseButtonPressed:
+                HandleClickEvent(event);
+                break;
+            default: break;
+        }
+    }
+}
+
+void Game::HandleClickEvent(sf::Event event) {
+    Players[CurrentPlayer].HandleClickEvent(event);
 }

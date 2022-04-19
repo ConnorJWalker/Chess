@@ -23,3 +23,15 @@ void Player::Draw() {
     }
 }
 
+void Player::HandleClickEvent(sf::Event event) {
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(Window);
+    for (Piece* piece : Pieces) {
+        if (piece->HasBeenClicked(mousePosition.x, mousePosition.y)) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                piece->HandleClickEvent();
+                return;
+            }
+        }
+    }
+}
+
