@@ -30,7 +30,7 @@ public:
         bool fromLowerX = false, fromHigherX = false;
         CheckIfCanTakePiece(fromLowerX, fromHigherX, other);
         if (fromLowerX) {
-            sf::Vector2i possibleMove(Location.x + 1, Location.y + MovementDirection);
+            sf::Vector2i possibleMove(Location.x - 1, Location.y + MovementDirection);
             possibleMoves.emplace_back(possibleMove);
         }
         if (fromHigherX) {

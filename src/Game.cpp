@@ -62,7 +62,10 @@ void Game::HandleClickEvent(sf::Event event) {
     else {
         if (Board.ClickedPossibleMove(mousePosition)) {
             Players[CurrentPlayer].MovePiece(SelectedPieceIndex, mousePosition / 100);
+            Players[CurrentPlayer == 0 ? 1 : 0].TryRemovePiece(mousePosition / 100);
             SelectedPieceIndex = -1;
+
+            CurrentPlayer = CurrentPlayer == 0 ? 1 : 0;
         }
 
         Board.ClearPossibleMoves();
