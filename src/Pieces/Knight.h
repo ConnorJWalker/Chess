@@ -9,7 +9,28 @@ public:
 
     std::vector<sf::Vector2i> GetPossibleMoves(
             std::vector<Piece*> const& currentPlayer,
-            std::vector<Piece*> const& other) override {
-        return std::vector<sf::Vector2i>();
+            [[maybe_unused]] std::vector<Piece*> const& other) override
+    {
+        // All possible locations in clockwise order
+        std::vector<sf::Vector2i> possibleMoves {
+            sf::Vector2i(Location.x + 1, Location.y - 2),
+            sf::Vector2i(Location.x + 2, Location.y - 1),
+            sf::Vector2i(Location.x + 2, Location.y + 1),
+            sf::Vector2i(Location.x + 1, Location.y + 2),
+            sf::Vector2i(Location.x - 1, Location.y + 2),
+            sf::Vector2i(Location.x - 2, Location.y + 1),
+            sf::Vector2i(Location.x - 2, Location.y - 1),
+            sf::Vector2i(Location.x - 1, Location.y - 2),
+        };
+
+        // Remove values where friendly pieces are located
+        for (Piece* piece : currentPlayer) {
+            auto position = std::find(possibleMoves.begin(), possibleMoves.end(), piece->GetLocation());
+            if (position != possibleMoves.end()) {
+                possibleMoves.erase(position);
+            }
+        }
+
+        return possibleMoves;
     }
 };
