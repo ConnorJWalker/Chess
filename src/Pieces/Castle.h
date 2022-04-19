@@ -13,7 +13,7 @@ public:
     {
         std::vector<sf::Vector2i> possibleMoves;
         // Set initial values to the longest possible so real values will always start smaller
-        int longestUp = 7, longestDown = 7, longestLeft = 7, longestRight = 7;
+        int longestUp = 8, longestDown = 8, longestLeft = 8, longestRight = 8;
         FindClosestDistances(longestUp, longestDown, longestLeft, longestRight, currentPlayer, true);
         FindClosestDistances(longestUp, longestDown, longestLeft, longestRight, other, false);
 
