@@ -7,7 +7,7 @@
 Game::Game() :
     Window(sf::RenderWindow(sf::VideoMode(800, 800), "Chess", sf::Style::Titlebar | sf::Style::Close)),
     TextureManager(),
-    Board(Window, TextureManager),
+    Board(Window, TextureManager, Players),
     Players {
     Player(Window, PieceColour::White,Board.InitBoardPieces(PieceColour::White)),
     Player(Window, PieceColour::Black,Board.InitBoardPieces(PieceColour::Black))
@@ -49,23 +49,24 @@ void Game::HandleEvents() {
 
 void Game::HandleClickEvent(sf::Event event) {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(Window);
+    int currentPlayer = Board.CurrentPlayer;
 
-    int index = Players[CurrentPlayer].FindClickedPieceIndex(mousePosition);
+    int index = Players[currentPlayer].FindClickedPieceIndex(mousePosition);
     if (index != -1) {
         SelectedPieceIndex = index;
         if (event.mouseButton.button == sf::Mouse::Left) {
-            int otherPlayer = CurrentPlayer == 0 ? 1 : 0;
-            auto possibleMoves = Players[CurrentPlayer].GetPossibleMoves(SelectedPieceIndex, Players[otherPlayer].GetPieces());
+            int otherPlayer = currentPlayer == 0 ? 1 : 0;
+            auto possibleMoves = Players[currentPlayer].GetPossibleMoves(SelectedPieceIndex, Players[otherPlayer].GetPieces());
             Board.SetPossibleMoves(possibleMoves);
         }
     }
     else {
         if (Board.ClickedPossibleMove(mousePosition)) {
-            Players[CurrentPlayer].MovePiece(SelectedPieceIndex, mousePosition / 100);
-            Players[CurrentPlayer == 0 ? 1 : 0].TryRemovePiece(mousePosition / 100);
+            Players[currentPlayer].MovePiece(SelectedPieceIndex, mousePosition / 100);
+            Players[currentPlayer == 0 ? 1 : 0].TryRemovePiece(mousePosition / 100);
             SelectedPieceIndex = -1;
 
-            CurrentPlayer = CurrentPlayer == 0 ? 1 : 0;
+            Board.CurrentPlayer = currentPlayer == 0 ? 1 : 0;
         }
 
         Board.ClearPossibleMoves();

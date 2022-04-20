@@ -21,7 +21,5 @@ private:
     void Draw();
     void HandleEvents();
     void HandleClickEvent(sf::Event event);
-
-    int CurrentPlayer = 0;
 };
 
