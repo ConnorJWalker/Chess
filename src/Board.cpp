@@ -7,6 +7,7 @@
 #include "Pieces/Knight.h"
 #include "Pieces/Bishop.h"
 #include "Pieces/King.h"
+#include "Pieces/Queen.h"
 #include "Board.h"
 
 Board::Board(sf::RenderWindow& window, class TextureManager& textureManager) : Window(window), TextureManager(textureManager) {}
@@ -68,7 +69,7 @@ std::vector<Piece*> Board::InitBoardPieces(PieceColour colour) {
     pieces.push_back(new Bishop(sf::Vector2i(5, otherY), bishopTexture));
 
     sf::Texture& queenTexture = TextureManager.GetTexture(PieceType::Queen, colour);
-    pieces.push_back(new Bishop(sf::Vector2i(3, otherY), queenTexture));
+    pieces.push_back(new Queen(sf::Vector2i(3, otherY), queenTexture));
 
     sf::Texture& kingTexture = TextureManager.GetTexture(PieceType::King, colour);
     pieces.push_back(new King(sf::Vector2i(4, otherY), kingTexture));
