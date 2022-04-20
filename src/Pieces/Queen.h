@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Piece.h"
-#include "PossibleLocationHelper.h"
+#include "../Helpers/PossibleLocationHelper.h"
 
 class Queen : public Piece {
 public:
