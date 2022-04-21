@@ -31,6 +31,15 @@ public:
             }
         }
 
-        return possibleMoves;
+        // Ensure all moves are within the boards bounds
+        std::vector<sf::Vector2i> cleanedMoves;
+        std::copy_if(
+            possibleMoves.begin(),
+            possibleMoves.end(),
+            std::back_inserter(cleanedMoves),
+            [](const sf::Vector2i move) { return move.x < 8 && move.y < 8 && move.x >= 0 && move.y >= 0; }
+        );
+
+        return cleanedMoves;
     }
 };

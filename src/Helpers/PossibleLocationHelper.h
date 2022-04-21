@@ -139,21 +139,20 @@ namespace plh {
         FindClosestDistancesDiagonal(northEast, southEast, southWest, northWest, other, location, false);
 
         // Start at 1 to prevent seeing current position as possible move
-        // TODO: add checks that the possible location is on the board
         for (int i = 1; i < 8; i++) {
-            if (northEast > i) {
+            if (northEast > i && location.x + i < 8 && location.y - i >= 0) {
                 possibleMoves.emplace_back(location.x + i, location.y - i);
             }
 
-            if (southEast > i) {
+            if (southEast > i && location.x + i < 8 && location.y + i < 8) {
                 possibleMoves.emplace_back(location.x + i, location.y + i);
             }
 
-            if (southWest > i) {
+            if (southWest > i && location.x - i >= 0 && location.y + i < 8) {
                 possibleMoves.emplace_back(location.x - i, location.y + i);
             }
 
-            if (northWest > i) {
+            if (northWest > i && location.x - i >= 0 && location.y - i >= 0) {
                 possibleMoves.emplace_back(location.x - i, location.y - i);
             }
         }
