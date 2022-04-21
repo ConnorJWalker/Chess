@@ -41,10 +41,15 @@ void Player::MovePiece(int index, sf::Vector2i square) {
     Pieces[index]->Move(square);
 }
 
-void Player::TryRemovePiece(sf::Vector2i square) {
+PieceType Player::TryRemovePiece(sf::Vector2i square) {
     auto it = std::find_if(Pieces.begin(), Pieces.end(), [square](Piece* piece) { return piece->GetLocation() == square; });
-    if (it != Pieces.end()) {
-        delete* it;
-        it = Pieces.erase(it);
+    if (it == Pieces.end()) {
+        return PieceType::None;
     }
+
+    PieceType type = (*it)->GetPieceType();
+    delete* it;
+    it = Pieces.erase(it);
+
+    return type;
 }

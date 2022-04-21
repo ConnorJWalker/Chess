@@ -9,7 +9,7 @@ public:
     void MovePiece(int index, sf::Vector2i square);
     int FindClickedPieceIndex(sf::Vector2i mousePosition);
     std::vector<sf::Vector2i> GetPossibleMoves(int index, std::vector<Piece*> const& otherPlayersPieces);
-    void TryRemovePiece(sf::Vector2i square);
+    PieceType TryRemovePiece(sf::Vector2i square);
 
     const std::vector<Piece*>& GetPieces() { return Pieces; }
 private:

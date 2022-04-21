@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Piece.h"
+#include "../Enums/PieceType.h"
 #include "../Helpers/PossibleLocationHelper.h"
 
 class Bishop : public Piece {
@@ -14,4 +15,6 @@ public:
     {
         return plh::GetPossibleMovesDiagonal(currentPlayer, other, Location);
     }
+
+    PieceType GetPieceType() override { return PieceType::Bishop; }
 };

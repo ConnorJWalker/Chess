@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Piece.h"
+#include "../Enums/PieceType.h"
 
 class Knight : public Piece {
 public:
@@ -42,4 +43,6 @@ public:
 
         return cleanedMoves;
     }
+
+    PieceType GetPieceType() override { return PieceType::Knight; }
 };

@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Piece.h"
+#include "../Enums/PieceType.h"
 #include "../Helpers/PossibleLocationHelper.h"
 
 class Queen : public Piece {
@@ -21,4 +22,6 @@ public:
 
         return possibleMoves;
     }
+
+    PieceType GetPieceType() override { return PieceType::Queen; }
 };

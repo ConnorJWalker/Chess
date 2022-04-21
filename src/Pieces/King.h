@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Piece.h"
+#include "../Enums/PieceType.h"
 
 class King : public Piece {
 public:
@@ -34,4 +35,6 @@ public:
 
         return possibleMoves;
     }
+
+    PieceType GetPieceType() { return PieceType::King; }
 };

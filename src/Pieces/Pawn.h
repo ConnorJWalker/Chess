@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Piece.h"
+#include "../Enums/PieceType.h"
 
 class Pawn : public Piece {
 public:
@@ -40,6 +41,8 @@ public:
 
         return possibleMoves;
     }
+
+    PieceType GetPieceType() override { return PieceType::Pawn; }
 
 private:
     sf::Vector2i StartLocation;

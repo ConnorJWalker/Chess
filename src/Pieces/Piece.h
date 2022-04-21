@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+#include "../Enums/PieceType.h"
+
 class Piece {
 public:
     Piece(sf::Vector2i location, sf::Texture& texture) : Body(sf::Vector2f(60.f, 60.f)), Location(location) {
@@ -10,6 +12,7 @@ public:
     }
 
     virtual ~Piece() = default;
+    virtual PieceType GetPieceType() = 0;
     virtual std::vector<sf::Vector2i> GetPossibleMoves(
             std::vector<Piece*> const& currentPlayer,
             std::vector<Piece*> const& other

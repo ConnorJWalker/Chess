@@ -66,9 +66,12 @@ void Game::HandleClickEvent(sf::Event event) {
     else {
         if (Board.ClickedPossibleMove(mousePosition)) {
             Players[currentPlayer].MovePiece(SelectedPieceIndex, mousePosition / 100);
-            Players[currentPlayer == 0 ? 1 : 0].TryRemovePiece(mousePosition / 100);
-            SelectedPieceIndex = -1;
+            PieceType type = Players[currentPlayer == 0 ? 1 : 0].TryRemovePiece(mousePosition / 100);
+            if (type != PieceType::None) {
+                UI.UpdateScore(type, currentPlayer);
+            }
 
+            SelectedPieceIndex = -1;
             Board.CurrentPlayer = currentPlayer == 0 ? 1 : 0;
         }
 
