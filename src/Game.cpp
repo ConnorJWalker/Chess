@@ -1,16 +1,19 @@
+#include <string>
 #include <SFML/Graphics.hpp>
 
 #include "Enums/PieceColour.h"
 #include "Game.h"
 
-Game::Game() :
-    Window(sf::RenderWindow(sf::VideoMode(800, 800), "Chess", sf::Style::Titlebar | sf::Style::Close)),
+Game::Game(GameMode gameMode, std::string player1Name, std::string player2Name) :
+    Window(sf::RenderWindow(sf::VideoMode(1250, 800), "Chess", sf::Style::Titlebar | sf::Style::Close)),
     TextureManager(),
     Board(Window, TextureManager, Players),
     Players {
     Player(Window, PieceColour::White,Board.InitBoardPieces(PieceColour::White)),
     Player(Window, PieceColour::Black,Board.InitBoardPieces(PieceColour::Black))
-    } {}
+    },
+    UI(Window, player1Name, player2Name, gameMode == GameMode::Local)
+    {}
 
 void Game::Start() {
     while (Window.isOpen())
@@ -21,11 +24,12 @@ void Game::Start() {
 }
 
 void Game::Draw() {
-    Window.clear();
+    Window.clear(sf::Color(35, 40, 50));
 
     Board.Draw();
     Players[0].Draw();
     Players[1].Draw();
+    UI.Draw();
 
     Window.display();
 }

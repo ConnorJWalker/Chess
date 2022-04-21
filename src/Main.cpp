@@ -46,30 +46,31 @@ GameMode getGameMode() {
 
 int main()
 {
-    Game game;
+    std::string player1Name, player2Name = "TODO";
 
     // TODO: create ui to display user data
     // TODO: create socket connection/server for multiplayer
-    switch (getGameMode()) {
+    GameMode gameMode = getGameMode();
+    switch (gameMode) {
         case GameMode::Local: {
-            std::string player1Name = getName(1);
-            std::string player2Name = getName(2);
+            player1Name = getName(1);
+            player2Name = getName(2);
             std::cout << player1Name << " " << player2Name << std::endl;
             break;
         }
         case GameMode::HostPrivate: {
-            std::string playerName = getName();
-            std::cout << playerName << std::endl;
+            player1Name = getName();
+            std::cout << player1Name << std::endl;
             break;
         }
         case GameMode::JoinPrivate: {
-            std::string playerName = getName();
-            std::cout << playerName << std::endl;
+            player1Name = getName();
+            std::cout << player1Name << std::endl;
             break;
         }
         case GameMode::JoinRandom: {
-            std::string playerName = getName();
-            std::cout << playerName << std::endl;
+            player1Name = getName();
+            std::cout << player1Name << std::endl;
             break;
         }
         case GameMode::Quit:
@@ -77,6 +78,7 @@ int main()
             return 0;
     }
 
+    Game game(gameMode, player1Name, player2Name);
     game.Start();
 
     return 0;

@@ -1,11 +1,13 @@
 #pragma once
 
+#include "UI/UI.h"
 #include "Board.h"
 #include "Players/Player.h"
+#include "Enums/GameMode.h"
 
 class Game {
 public:
-    Game();
+    Game(GameMode gameMode, std::string player1Name, std::string player2Name);
 
     void Start();
 
@@ -15,6 +17,8 @@ private:
     TextureManager TextureManager;
     Board Board;
     Player Players[2];
+
+    UI UI;
 
     int SelectedPieceIndex = -1;
 
