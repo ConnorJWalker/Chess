@@ -1,7 +1,11 @@
+#include <array>
 #include <iostream>
+#include <asio.hpp>
 
 #include "Game.h"
 #include "Enums/GameMode.h"
+
+using asio::ip::tcp;
 
 std::string getName(int playerNumber = 0) {
     std::string name;
@@ -46,6 +50,38 @@ GameMode getGameMode() {
 
 int main()
 {
+    try {
+        asio::io_context context;
+        tcp::resolver resolver(context);
+        tcp::resolver::query query("127.0.0.1", "13000", asio::ip::resolver_query_base::numeric_service);
+        tcp::resolver::results_type endpoints = resolver.resolve(query);
+
+        tcp::socket socket(context);
+        asio::connect(socket, endpoints);
+
+        while (true) {
+            std::array<char, 128> buffer{};
+            asio::error_code error;
+
+            socket.send(asio::buffer("Ping"));
+
+            size_t length = socket.read_some(asio::buffer(buffer), error);
+            if (error == asio::error::eof) {
+                std::cout << "Connection closed" << std::endl;
+                return 0;
+            }
+            else if (error) {
+                throw asio::system_error(error);
+            }
+
+            std::cout.write(buffer.data(), length);
+            return 0;
+        }
+    }
+    catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
+
     std::string player1Name, player2Name = "TODO";
 
     // TODO: create ui to display user data
