@@ -1,5 +1,6 @@
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <utility>
 
 #include "Enums/PieceColour.h"
 #include "Game.h"
@@ -12,7 +13,7 @@ Game::Game(GameMode gameMode, std::string player1Name, std::string player2Name) 
     Player(Window, PieceColour::White,Board.InitBoardPieces(PieceColour::White)),
     Player(Window, PieceColour::Black,Board.InitBoardPieces(PieceColour::Black))
     },
-    UI(Window, player1Name, player2Name, gameMode == GameMode::Local)
+    UI(Window, TextureManager, std::move(player1Name), std::move(player2Name), gameMode == GameMode::Local)
     {}
 
 void Game::Start() {
