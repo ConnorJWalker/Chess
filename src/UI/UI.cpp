@@ -24,11 +24,6 @@ UI::UI(sf::RenderWindow& window, class TextureManager& textureManager, std::stri
     Player2Label.setCharacterSize(24);
     Player2Label.setPosition(sf::Vector2f(820.f, 0.f));
 
-    Player2Label.setFont(Font);
-    Player2Label.setString(Player2Name);
-    Player2Label.setCharacterSize(24);
-    Player2Label.setPosition(sf::Vector2f(820.f, 0.f));
-
     ScoreLabel.setFont(Font);
     ScoreLabel.setCharacterSize(14);
 }
