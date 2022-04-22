@@ -16,7 +16,7 @@ private:
     sf::RenderWindow& Window;
     TextureManager& TextureManager;
 
-    sf::Text Player1Label, Player2Label, Player1ScoreLabel, Player2ScoreLabel;
+    sf::Text Player1Label, Player2Label, ScoreLabel;
 
     bool IsLocalGame;
     std::string Player1Name, Player2Name;

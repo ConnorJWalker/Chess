@@ -28,6 +28,9 @@ UI::UI(sf::RenderWindow& window, class TextureManager& textureManager, std::stri
     Player2Label.setString(Player2Name);
     Player2Label.setCharacterSize(24);
     Player2Label.setPosition(sf::Vector2f(820.f, 0.f));
+
+    ScoreLabel.setFont(Font);
+    ScoreLabel.setCharacterSize(14);
 }
 
 void UI::Draw() {
@@ -53,6 +56,19 @@ void UI::Draw() {
                 counter++;
             }
         }
+    }
+
+    // Display score difference next to winning player, only if there is a difference
+    float yBuffer = 6.f; // Make up for font sizes causing misalignment
+    if (Player1Score > Player2Score) {
+        ScoreLabel.setString("+" + std::to_string(Player1Score - Player2Score));
+        ScoreLabel.setPosition(820.f + Player1Label.getLocalBounds().width + 10.f, 730.f + yBuffer);
+        Window.draw(ScoreLabel);
+    }
+    else if (Player1Score < Player2Score) {
+        ScoreLabel.setString("+" + std::to_string(Player2Score - Player1Score));
+        ScoreLabel.setPosition(820.f + Player1Label.getLocalBounds().width + 10.f, 0.f + yBuffer);
+        Window.draw(ScoreLabel);
     }
 }
 
